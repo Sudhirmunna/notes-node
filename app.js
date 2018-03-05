@@ -9,8 +9,31 @@ const notes = require('./notes');
 
 // let filterArray = _.uniq([1,2,3,1,2,4,5,3,2]);
 // console.log(filterArray);
-
-let argv = yargs.argv;
+const titleOptions = {
+    describe: 'Title of note',
+    demand: true,
+    alias: 't'
+  };
+const bodyOptions = {
+    describe: 'Body of note',
+    demand: true,
+    alias: 'b'
+  };
+const argv = yargs
+    .command('add', 'Add a new note', {
+      title: titleOptions,
+      body: bodyOptions
+    })
+    .command('list', 'List all notes')
+    .command('read', 'Read a note', {
+      title: titleOptions,
+    })
+    .command('remove', 'Remove a note', {
+      title: titleOptions
+    })
+    .help()
+    .argv;
+//let argv = yargs.argv;
 let command = argv._[0];
 // process.argv
 if(command === 'add') {
